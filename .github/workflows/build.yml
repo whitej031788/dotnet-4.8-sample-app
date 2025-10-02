@@ -46,6 +46,8 @@ jobs:
           /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.verbose=true
+          /d:sonar.scm.exclusions.disabled=true
+          /d:sonar.sca.resolveAsRoot=true
 
       - name: Build (MSBuild)
         shell: pwsh
