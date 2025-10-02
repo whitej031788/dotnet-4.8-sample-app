@@ -29,9 +29,14 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: Restore NuGet packages
+      - name: Restore NuGet packages (packages.config)
         shell: pwsh
-        run: nuget restore DescopeSampleApp.sln
+        run: nuget restore DescopeSampleApp.sln -NonInteractive -Verbosity detailed
+
+    # Optional belt-and-braces: ensure the exact missing package exists
+      - name: Ensure Microsoft.CodeDom package is present
+        shell: pwsh
+        run: nuget install Microsoft.CodeDom.Providers.DotNetCompilerPlatform -Version 2.0.1 -OutputDirectory packages
 
       - name: SonarQube Begin
         shell: pwsh
@@ -44,7 +49,7 @@ jobs:
 
       - name: Build (MSBuild)
         shell: pwsh
-        run: msbuild DescopeSampleApp.sln /t:Rebuild /p:Configuration=Release
+        run: msbuild DescopeSampleApp.sln /t:Rebuild /p:Configuration=Release /p:UseSharedCompilation=false
 
       - name: SonarQube End
         shell: pwsh
