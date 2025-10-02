@@ -49,7 +49,7 @@ jobs:
           /d:sonar.scm.exclusions.disabled=true
           /d:sonar.sca.resolveAsRoot=true
           /d:sonar.qualitygate.wait=true
-          /d:sonar.qualitygate.timeout=1200
+          /d:sonar.qualitygate.timeout=5
 
       - name: Build (MSBuild)
         shell: pwsh
