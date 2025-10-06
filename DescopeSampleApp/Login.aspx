@@ -17,7 +17,7 @@
         const onSuccess = () => {
             window.location.replace('/');
         };
-        const onError = (err) => console.log(err);
+        const onError = (err) => console.log('error');
 
         wcElement.addEventListener('success', onSuccess);
         wcElement.addEventListener('error', onError);
